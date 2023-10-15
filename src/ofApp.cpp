@@ -75,7 +75,7 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    ofTranslate(120*ofGetWidth()/CANVAS_HEIGHT,0);
+    ofTranslate(70*ofGetWidth()/CANVAS_HEIGHT,0);
     ofScale(1.0*ofGetHeight()/CANVAS_HEIGHT);
 
     displayedImage.draw(0,0);
