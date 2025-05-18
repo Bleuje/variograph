@@ -1,4 +1,4 @@
-# Variations Combinator
+# Variograph
 
 This is a kind of real-time generative art drawing project coded in openFrameworks and shaders.
 
