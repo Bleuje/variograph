@@ -12,6 +12,8 @@ Screenshot of the tool :
 
 ![tool screenshot](doc/sceenshot-example.png)
 
+[**Gallery webpage**](https://bleuje.com/variograph-gallery), showcasing lots of outputs.
+
 ▶️ [**Demo video on YouTube**](https://www.youtube.com/watch?v=uhF0tUzj6o8) ✨
 
 ## Building with openFrameworks from source
