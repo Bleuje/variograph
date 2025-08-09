@@ -10,7 +10,7 @@ void ofApp::actionNewParameters()
 // use final sinusoid or not
 void ofApp::actionSetBounder()
 {
-    doSinusoid  = (doSinusoid+1)%2;
+    doSinusoid  = (doSinusoid+1)%3;
     renderNewOne = true;
 }
 
