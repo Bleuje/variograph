@@ -20,6 +20,7 @@ uniform float mouseY;
 uniform float rot1;
 uniform float rot2;
 uniform float rot3;
+uniform int colorPrecision;
 
 uniform int projectionIndex;
 uniform float projDist;
@@ -149,9 +150,17 @@ layout(std430,binding=4) buffer parameters
 	RandomParameters params[];
 };
 
-layout(std430,binding=0) buffer mutex
+layout(std430,binding=0) buffer countR
 {
-	uint m[];
+	uint mR[];
+};
+layout(std430,binding=1) buffer countG
+{
+	uint mG[];
+};
+layout(std430,binding=2) buffer countB
+{
+	uint mB[];
 };
 
 vec2 LoopedPosition(vec2 pos)
@@ -1117,10 +1126,17 @@ vec2 applyVariation(vec2 p,int type,int index)
 	return result + vec2(params[index].tx,params[index].ty);
 }
 
+vec3 pal( in float t, in vec3 a, in vec3 b, in vec3 c, in vec3 d )
+{
+    return a + b*cos( 6.28318*(c*t+d) );
+}
+
 layout(local_size_x = 32, local_size_y = 32, local_size_z = 1) in;
 void main(){
 	float px = float(gl_GlobalInvocationID.x)/float(nx);
 	float py = float(gl_GlobalInvocationID.y)/float(ny);
+
+    vec3 color = pal( px, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(1.0,1.0,1.0),vec3(0.0,0.33,0.67) );
 	
 	float w0 = 3.; // size of initial square
 	
@@ -1316,6 +1332,13 @@ void main(){
 		ivec2 pos = ivec2(LoopedPosition(vec2(iTarget.x+i,iTarget.y+j)));
 		uint val = uint(3-abs(i)-abs(j)); // more value at center of for loops
 		if(threeD==1) val = uint((3-abs(i)-abs(j))*factor);
-		atomicAdd(m[ pos.x * int(height) + pos.y ],val); // incrementing the pixel value we fall on, the point of this whole shader
+
+        int weightR = int(float(colorPrecision) * color.r);
+        int weightG = int(float(colorPrecision) * color.g);
+        int weightB = int(float(colorPrecision) * color.b);
+
+		atomicAdd(mR[ pos.x * int(height) + pos.y ],val*weightR);
+        atomicAdd(mG[ pos.x * int(height) + pos.y ],val*weightG);
+        atomicAdd(mB[ pos.x * int(height) + pos.y ],val*weightB);
 	}
 }

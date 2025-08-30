@@ -8,10 +8,19 @@ uniform float randomizer;
 uniform float time;
 uniform int threeD;
 uniform float greyBackgroundFactor;
+uniform int colorPrecision;
 
-layout(std430,binding=0) buffer mutex
+layout(std430,binding=0) buffer countR
 {
-	uint m[];
+	uint mR[];
+};
+layout(std430,binding=1) buffer countG
+{
+	uint mG[];
+};
+layout(std430,binding=2) buffer countB
+{
+	uint mB[];
 };
 
 layout(rgba32f,binding=3) uniform writeonly image2D displayImage;
@@ -87,7 +96,7 @@ vec3 aces(vec3 x) {
 layout(local_size_x = 32, local_size_y = 32, local_size_z = 1) in;
 void main(){
 	ivec2 pos = ivec2(gl_GlobalInvocationID.xy);
-	uint cpt = m[ pos.x * int(height) + pos.y ];
+	uint cpt = mR[ pos.x * int(height) + pos.y ];
 	
 	vec2 fpos = vec2(pos);
 
@@ -95,6 +104,9 @@ void main(){
 
 	greyValue = max(0.,greyValue);
 	vec4 color0 = vec4(greyValue,greyValue,greyValue,1.0);
+
+    vec3 cntRGB = vec3(mR[ pos.x * int(height) + pos.y ],mG[ pos.x * int(height) + pos.y ],mB[ pos.x * int(height) + pos.y ])/float(colorPrecision)/countPerColorChange;
+    color0 = vec4(cntRGB,1.0);
 	
 	vec3 rgb;
 	if(colormode==0) rgb = vec3(greyBackgroundFactor)-0.76*tanh(color0.rgb); // black on light grey

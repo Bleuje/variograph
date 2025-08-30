@@ -27,6 +27,8 @@ public:
     int nx = 2048*4; // number of dots (x-axis)
     int ny = 2048*4; // number of dots (y-axis)
 
+    int colorPrecision = 256;
+
     int MAX_FPS = 60;
     float time;
 

@@ -123,6 +123,7 @@ void ofApp::drawFold()
     countIncrementerShader.setUniform1f("height", displayedImage.getHeight());
     countIncrementerShader.setUniform1i("nx", nx);
     countIncrementerShader.setUniform1i("ny", ny);
+    countIncrementerShader.setUniform1i("colorPrecision",colorPrecision);
     countIncrementerShader.setUniform1i("sequenceLength",curNumberOfSuccessiveVariations);
     countIncrementerShader.setUniform1i("doSinusoid",doSinusoid);
     float sinusoidStretch = 0.5*pow(1.02,sinusoidStretchCount);
@@ -169,6 +170,7 @@ void ofApp::drawFold()
     finalColorShader.begin();
     finalColorShader.setUniform1f("width", displayedImage.getWidth());
     finalColorShader.setUniform1f("height", displayedImage.getHeight());
+    finalColorShader.setUniform1i("colorPrecision",colorPrecision);
     float countPerColorChange = pow(1.02,contrastCount)*800.;
     finalColorShader.setUniform1f("countPerColorChange", countPerColorChange);
     finalColorShader.setUniform1i("colormode",colorMode);
