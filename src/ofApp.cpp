@@ -9,10 +9,11 @@ void ofApp::setup() {
     myFontBold.load("fonts/Raleway-Bold.ttf",floor(40.0*1080/CANVAS_HEIGHT));
 
     pixelCount.resize(CANVAS_WIDTH*CANVAS_HEIGHT);
-    pixelCountBuffer.allocate(pixelCount, GL_DYNAMIC_DRAW); // array with pixel counts
+    pixelCountBufferR.allocate(pixelCount, GL_DYNAMIC_DRAW); // array with pixel counts
+    pixelCountBufferG.allocate(pixelCount, GL_DYNAMIC_DRAW); // array with pixel counts
+    pixelCountBufferB.allocate(pixelCount, GL_DYNAMIC_DRAW); // array with pixel counts
 
     displayedImage.allocate(CANVAS_WIDTH, CANVAS_HEIGHT, GL_RGBA32F);
-    debugImage.allocate(CANVAS_WIDTH, CANVAS_HEIGHT, GL_RGBA32F); // just useful to debug, for example to show gaussian noise values with an image
 
     pixelCountValueSetterShader.setupShaderFromFile(GL_COMPUTE_SHADER, "shaders/computeshader_countsetter.glsl");
     pixelCountValueSetterShader.linkProgram();
@@ -28,9 +29,10 @@ void ofApp::setup() {
     variationsParametersBuffer.allocate(variationsParameters,GL_DYNAMIC_DRAW);
     variationsParametersBuffer.bindBase(GL_SHADER_STORAGE_BUFFER, 4);
 
-    pixelCountBuffer.bindBase(GL_SHADER_STORAGE_BUFFER, 0);
+    pixelCountBufferR.bindBase(GL_SHADER_STORAGE_BUFFER, 0);
+    pixelCountBufferG.bindBase(GL_SHADER_STORAGE_BUFFER, 1);
+    pixelCountBufferB.bindBase(GL_SHADER_STORAGE_BUFFER, 2);
     displayedImage.getTexture().bindAsImage(3, GL_WRITE_ONLY);
-    debugImage.getTexture().bindAsImage(1, GL_WRITE_ONLY);
 
     ////////////////////////////////////////
     // check if there is a gamepad connected

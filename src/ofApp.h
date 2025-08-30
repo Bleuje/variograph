@@ -19,10 +19,10 @@ public:
     void drawFold();
 
     std::vector<uint32_t> pixelCount;
-    ofBufferObject pixelCountBuffer;
+    ofBufferObject pixelCountBufferR,pixelCountBufferG,pixelCountBufferB;
     ofShader finalColorShader, pixelCountValueSetterShader, countIncrementerShader;
 
-    ofFbo displayedImage, debugImage;
+    ofFbo displayedImage;
 
     int nx = 2048*4; // number of dots (x-axis)
     int ny = 2048*4; // number of dots (y-axis)

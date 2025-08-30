@@ -154,8 +154,6 @@ layout(std430,binding=0) buffer mutex
 	uint m[];
 };
 
-layout(rgba32f,binding=1) uniform writeonly image2D debugImage;
-
 vec2 LoopedPosition(vec2 pos)
 {
 	return vec2(mod(pos.x + width,width),mod(pos.y+height,height));
