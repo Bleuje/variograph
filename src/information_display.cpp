@@ -29,7 +29,7 @@ void ofApp::showState()
 
         int reversedIndex = (curNumberOfSuccessiveVariations - i - 1);
 
-        float col = (colorMode!=0 && colorMode!=3 ? 255 : 0);
+        float col = (colorMode!=8 ? 255 : 0);
 
         ofTranslate(0,yTranslation*reversedIndex);
 
@@ -96,7 +96,7 @@ void ofApp::showState()
 
     float alpha0 = 255-infoAlpha;
 
-    float col = (colorMode!=0 && colorMode!=3 ? 255 : 0);
+    float col = (colorMode!=8 ? 255 : 0);
 
     if(numberOfGamepads>0)
     {

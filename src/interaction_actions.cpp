@@ -71,7 +71,7 @@ void ofApp::actionChangeFunctionAtCursor(int step)
 // change colors
 void ofApp::actionChangeColors()
 {
-    colorMode = (colorMode+1)%3; // with this modulo only the 3 first color modes are used
+    colorMode = (colorMode+1)%9;
     renderNewOne = true;
 }
 

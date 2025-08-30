@@ -60,7 +60,7 @@ void ofApp::update() {
 
     ofSetColor(255);
 
-    if(colorMode!=0 && colorMode!=3) ofBackground(0);
+    if(colorMode!=8) ofBackground(0);
     else ofBackground(255*GREY_BACKGROUND_FACTOR);
 
     // compute new drawing only if needed
@@ -158,6 +158,8 @@ void ofApp::drawFold()
     countIncrementerShader.setUniform1f("rot1",curRot1);
     countIncrementerShader.setUniform1f("rot2",curRot2);
     countIncrementerShader.setUniform1f("rot3",curRot3);
+
+    countIncrementerShader.setUniform1i("colormode",colorMode);
 
     countIncrementerShader.setUniform1i("projectionIndex",chosenProjectionDivisor);
 

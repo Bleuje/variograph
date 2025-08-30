@@ -21,6 +21,7 @@ uniform float rot1;
 uniform float rot2;
 uniform float rot3;
 uniform int colorPrecision;
+uniform int colormode;
 
 uniform int projectionIndex;
 uniform float projDist;
@@ -1136,7 +1137,13 @@ void main(){
 	float px = float(gl_GlobalInvocationID.x)/float(nx);
 	float py = float(gl_GlobalInvocationID.y)/float(ny);
 
-    vec3 color = pal( px, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(1.0,1.0,1.0),vec3(0.0,0.33,0.67) );
+    vec3                color = pal( px, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(1.0,1.0,1.0),vec3(0.0,0.33,0.67) );
+    if(colormode==1) color = pal( px, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(1.0,1.0,1.0),vec3(0.0,0.10,0.20) );
+    if(colormode==2) color = pal( px, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(1.0,1.0,1.0),vec3(0.3,0.20,0.20) );
+    if(colormode==3) color = pal( px, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(1.0,1.0,0.5),vec3(0.8,0.90,0.30) );
+    if(colormode==4) color = pal( px, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(1.0,0.7,0.4),vec3(0.0,0.15,0.20) );
+    if(colormode==5) color = pal( px, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(2.0,1.0,0.0),vec3(0.5,0.20,0.25) );
+    if(colormode==6) color = pal( px, vec3(0.8,0.5,0.4),vec3(0.2,0.4,0.2),vec3(2.0,1.0,1.0),vec3(0.0,0.25,0.25) );
 	
 	float w0 = 3.; // size of initial square
 	

@@ -102,30 +102,17 @@ void main(){
 
 	float greyValue = float(cpt)/countPerColorChange;
 
-	greyValue = max(0.,greyValue);
-	vec4 color0 = vec4(greyValue,greyValue,greyValue,1.0);
-
     vec3 cntRGB = vec3(mR[ pos.x * int(height) + pos.y ],mG[ pos.x * int(height) + pos.y ],mB[ pos.x * int(height) + pos.y ])/float(colorPrecision)/countPerColorChange;
-    color0 = vec4(cntRGB,1.0);
+    vec4 color0 = vec4(cntRGB,1.0);
 	
 	vec3 rgb;
-	if(colormode==0) rgb = vec3(greyBackgroundFactor)-0.76*tanh(color0.rgb); // black on light grey
-	if(colormode==1) rgb = vec3(tanh(color0.rgb*0.7)); // white on black
-	if(colormode>=2)
+	if(colormode<=6) rgb = vec3(tanh(color0.rgb*0.7)); // white on black
+	else
 	{
-		float greyValue2 = (threeD>0 ? 4.0*tanh(greyValue/2.0) : 1.1*tanh(greyValue/1.5));
+		float greyValue = float(mR[ pos.x * int(height) + pos.y ] + mG[ pos.x * int(height) + pos.y ] + mB[ pos.x * int(height) + pos.y ])/3.0/float(colorPrecision)/countPerColorChange;
 		
-		if(colormode==2) color0.rgb = aces(pal(1.0*greyValue2 + 0.25 -0.17*time, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(1.0,1.0,1.0),vec3(0.0,0.33,0.67)));
-		if(colormode==6) color0.rgb = pal(1.25*greyValue2, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(1.0,1.0,1.0),vec3(0.0,0.10,0.20));
-		if(colormode==7) color0.rgb = pal(1.25*greyValue2, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(1.0,1.0,1.0),vec3(0.3,0.20,0.20));
-		if(colormode==5) color0.rgb = pal(1.25*greyValue2, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(1.0,1.0,0.5),vec3(0.8,0.90,0.30));
-		if(colormode==3) color0.rgb = pal(1.25*greyValue2, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(1.0,0.7,0.4),vec3(0.0,0.15,0.20));
-		if(colormode==4) color0.rgb = pal(0.8*greyValue2, vec3(0.5,0.5,0.5),vec3(0.5,0.5,0.5),vec3(2.0,1.0,0.0),vec3(0.5,0.20,0.25));
-		
-		if(colormode!=3) rgb = aces(vec3(tanh(pow(max(greyValue-0.01,0),0.05))*tanh(color0.rgb)));
-		else rgb = vec3(greyBackgroundFactor)-vec3(tanh(pow(max(greyValue-0.01,0),0.05))*tanh(color0.rgb));
-
-		//if(threeD>0) rgb = pow(rgb,vec3(0.8));
+        if(colormode==7) rgb = vec3(tanh(greyValue)); // white on black
+        else if(colormode==8) rgb = vec3(greyBackgroundFactor-0.76*tanh(greyValue)); // black on white
 	}
 	
 	imageStore(displayImage,pos,vec4(rgb,1.0));
