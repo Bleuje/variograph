@@ -66,7 +66,7 @@ void ofApp::keyPressed(int key) {
     if(key=='f') // increase the number of folds
     {
         addingNewFold = true;
-        curNumberOfSuccessiveVariations = min(curNumberOfSuccessiveVariations+1,MAX_NUMBER_OF_VARIATIONS);
+        curNumberOfSuccessiveVariations = std::min(curNumberOfSuccessiveVariations+1,MAX_NUMBER_OF_VARIATIONS);
         setNewParameters();
         addingNewFold = false;
         renderNewOne = true;

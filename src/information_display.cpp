@@ -67,7 +67,7 @@ void ofApp::showState()
 
         ofPopMatrix();
 
-        ofTranslate(18.0*sin(PI*min(change0,change1)),0);
+        ofTranslate(18.0*sin(PI*std::min(change0,change1)),0);
 
         if(i>0 && (threeD==0||(reversedIndex!=curNumberOfSuccessiveVariations/2-1)))
         {

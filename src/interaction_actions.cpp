@@ -35,7 +35,7 @@ void ofApp::actionRandomizeParametersOfSingleVariation()
 // add function at cursor
 void ofApp::actionAddFunctionAtCursor()
 {
-        curNumberOfSuccessiveVariations = min(curNumberOfSuccessiveVariations+1,MAX_NUMBER_OF_VARIATIONS);
+        curNumberOfSuccessiveVariations = std::min(curNumberOfSuccessiveVariations+1,MAX_NUMBER_OF_VARIATIONS);
         for(int j=curNumberOfSuccessiveVariations-1;j>indexOfChanges;j--) variationsParameters[j] = variationsParameters[j-1];
         for(int j=curNumberOfSuccessiveVariations-1;j>indexOfChanges;j--) weightCount[j] = weightCount[j-1];
         changeVariationParameters(indexOfChanges);
